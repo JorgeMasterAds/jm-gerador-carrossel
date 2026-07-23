@@ -23,8 +23,16 @@ Get-Content ".env" -Encoding UTF8 | ForEach-Object {
 }
 
 # ── Trava de licença ──────────────────────────────────────────────────────────
-if ($env:LICENSE_KEY -ne 'JMADS') {
-  Write-Host "`n🔒 Ferramenta bloqueada. Defina LICENSE_KEY=JMADS no .env.`n"
+# Hash SHA-256 da senha válida — a senha em si não fica escrita em texto
+# puro em nenhum arquivo deste repositório. Peça a senha ao vendedor.
+$hashValido = '9ef551e8fa06d0eb1a0af52ec0ef197f698b2781f1e5fbeb86c46ffb9187aa27'
+$chave = if ($env:LICENSE_KEY) { $env:LICENSE_KEY.Trim().ToUpper() } else { '' }
+$sha256 = [System.Security.Cryptography.SHA256]::Create()
+$bytes = $sha256.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($chave))
+$hashCalculado = ($bytes | ForEach-Object { $_.ToString('x2') }) -join ''
+
+if ($hashCalculado -ne $hashValido) {
+  Write-Host "`n🔒 Ferramenta bloqueada. Defina LICENSE_KEY no .env com a senha fornecida na compra.`n"
   exit 1
 }
 

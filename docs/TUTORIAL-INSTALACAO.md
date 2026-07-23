@@ -32,11 +32,12 @@ Isso baixa as bibliotecas que o projeto usa (leva 1-2 minutos).
 
 1. Copie o arquivo `.env.example` e renomeie a cópia para `.env`.
 2. Abra o `.env` num editor de texto (Bloco de Notas serve).
-3. Confirme que a primeira linha tem:
+3. Substitua `LICENSE_KEY=sua_senha_aqui` pela senha que você recebeu na
+   compra, por exemplo:
    ```
-   LICENSE_KEY=JMADS
+   LICENSE_KEY=SUA-SENHA-AQUI
    ```
-   Sem essa linha certa, nenhum script roda — a ferramenta bloqueia
+   Sem a senha certa, nenhum script roda — a ferramenta bloqueia
    automaticamente com uma mensagem de aviso.
 
 ---
@@ -208,7 +209,8 @@ para conferir se sua foto, seu @ e sua cor de marca aparecem certos.
 ## Dúvidas frequentes
 
 **"A ferramenta não roda, dá erro de licença."**
-Confira se `.env` tem `LICENSE_KEY=JMADS` exatamente, sem espaços extras.
+Confira se `.env` tem `LICENSE_KEY=` com a senha exata que você recebeu na
+compra, sem espaços extras.
 
 **"As cores não mudam nos templates."**
 Confirme que `config/brand.config.json` existe (não só o `.example.json`) e
