@@ -148,32 +148,121 @@ a publicação automática. A ferramenta nunca pula essa etapa sozinha.
 
 ## 6. Configurar Supabase (armazenamento das imagens)
 
-1. Crie uma conta grátis em [supabase.com](https://supabase.com).
-2. Crie um novo projeto.
-3. Vá em **Storage** → **New bucket** → nomeie `criativos` → marque como
-   **público**.
-4. Vá em **Settings → API** e copie:
-   - **Project URL** → `SUPABASE_URL`
-   - **service_role key** (não a `anon` key) → `SUPABASE_SERVICE_ROLE`
-5. Preencha no `.env`.
+O Supabase guarda as imagens/vídeos gerados e gera um link público para
+cada um — esse link é o que o Trello e o Instagram usam para exibir a arte.
+É grátis para o volume deste uso.
+
+1. Acesse [supabase.com](https://supabase.com) → **Start your project** →
+   entre com GitHub, Google ou e-mail.
+2. Clique em **New Project**:
+   - **Name:** qualquer nome (ex: `carrossel-toolkit`)
+   - **Database Password:** gere uma senha forte e guarde num lugar seguro
+     (não é usada por este projeto, mas o Supabase exige)
+   - **Region:** escolha a mais próxima (ex: `South America (São Paulo)`)
+   - Clique em **Create new project** e aguarde 1-2 minutos de provisionamento
+3. No menu lateral, clique em **Storage** → botão **New bucket**:
+   - **Name:** `criativos` (exatamente assim, minúsculo)
+   - Marque a opção **Public bucket** como **ativada**
+   - Clique em **Create bucket**
+4. No menu lateral, clique em **Project Settings** (ícone de engrenagem) →
+   **API**. Você vai ver duas informações importantes:
+   - **Project URL** — algo como `https://xxxxxxxxxxxx.supabase.co` → cole em
+     `SUPABASE_URL`
+   - **Project API keys → service_role** — clique em "Reveal" para mostrar
+     o valor completo (é uma string longa começando com `eyJ...`) → cole em
+     `SUPABASE_SERVICE_ROLE`
+   - **Atenção:** existem duas chaves parecidas ali (`anon` e
+     `service_role`). Use sempre a **service_role** — a `anon` não tem
+     permissão de escrita e o upload vai falhar.
+5. Preencha no `.env`:
+   ```
+   SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
+   SUPABASE_SERVICE_ROLE=eyJ...(chave completa)
+   SUPABASE_BUCKET=criativos
+   ```
 
 ---
 
 ## 7. Configurar Instagram (publicação automática)
 
-1. Sua conta do Instagram precisa ser **profissional** e conectada a uma
-   **Página do Facebook**.
-2. Acesse [developers.facebook.com](https://developers.facebook.com) → crie
-   um app → adicione o produto **Instagram Graph API**.
-3. Em **Graph API Explorer**, gere um token com as permissões:
-   `instagram_basic`, `instagram_content_publish`, `pages_read_engagement`.
-4. Pegue o **ID numérico da conta do Instagram** em Meta Business Suite →
-   Configurações → Contas do Instagram.
-5. Preencha no `.env`:
+Esta é a etapa mais burocrática — não é do toolkit, é assim que a Meta
+(dona do Instagram) exige para qualquer ferramenta publicar automaticamente.
+Faça uma vez só; depois disso é só usar.
+
+### 7.1 — Preparar a conta do Instagram
+
+1. No app do Instagram → **Configurações** → **Conta** → confirme que é
+   **Conta profissional** (Criador de conteúdo ou Empresa). Se não for,
+   ative ali mesmo — é gratuito e reversível.
+2. A conta profissional precisa estar conectada a uma **Página do
+   Facebook** (pode ser uma página nova, sem seguidores, só para isso
+   funcionar). No app do Instagram: **Configurações** → **Contas
+   vinculadas** → **Facebook** → conecte ou crie a página quando pedido.
+
+### 7.2 — Criar o app na Meta for Developers
+
+1. Acesse [developers.facebook.com](https://developers.facebook.com) →
+   faça login com a MESMA conta do Facebook conectada à sua página.
+2. Menu superior → **My Apps** → **Create App**.
+3. Escolha o tipo **Business** → dê um nome ao app (ex: "Publicador
+   Carrossel") → **Create App**.
+4. Dentro do app criado, procure o card **Instagram Graph API** (ou
+   **Instagram API with Instagram Login**, dependendo da versão da
+   interface) → clique em **Set Up** / **Configurar**.
+
+### 7.3 — Gerar o token de acesso
+
+1. No menu lateral do app, vá em **Ferramentas** → **Graph API Explorer**
+   (ou acesse direto:
+   [developers.facebook.com/tools/explorer](https://developers.facebook.com/tools/explorer)).
+2. No topo da página, em **Meta App**, selecione o app que você criou.
+3. Em **User or Page**, selecione **User Token**.
+4. Clique em **Permissions** (ou no ícone de cadeado) e marque:
+   - `instagram_basic`
+   - `instagram_content_publish`
+   - `pages_show_list`
+   - `pages_read_engagement`
+5. Clique em **Generate Access Token** → autorize sua conta quando o
+   Facebook pedir.
+6. Esse token gerado dura só ~1-2 horas — precisa trocar por um de longa
+   duração (60 dias). Cole a URL abaixo no navegador, substituindo pelos
+   seus dados (`SEU_APP_ID` e `SEU_APP_SECRET` ficam em **App Settings →
+   Basic** do seu app; `TOKEN_CURTO` é o que você acabou de gerar):
    ```
-   IG_ACCOUNT_ID=17841000000000000
-   IG_ACCESS_TOKEN=seu_token_aqui
+   https://graph.facebook.com/v22.0/oauth/access_token?grant_type=fb_exchange_token&client_id=SEU_APP_ID&client_secret=SEU_APP_SECRET&fb_exchange_token=TOKEN_CURTO
    ```
+   A resposta traz um `access_token` novo, válido por 60 dias — esse é o
+   que vai no `.env`. Quando expirar, repita este passo 7.3 para gerar
+   outro (ou peça para eu automatizar um lembrete, se quiser).
+
+### 7.4 — Descobrir o IG_ACCOUNT_ID
+
+1. Ainda no Graph API Explorer, com o token de longa duração selecionado,
+   rode (cole no campo de consulta e clique em **Submit**):
+   ```
+   me/accounts
+   ```
+   Isso lista suas Páginas do Facebook — copie o `id` da página conectada
+   ao seu Instagram.
+2. Rode em seguida (substituindo `ID_DA_PAGINA` pelo valor do passo
+   anterior):
+   ```
+   ID_DA_PAGINA?fields=instagram_business_account
+   ```
+   O número que aparece dentro de `instagram_business_account` é o seu
+   `IG_ACCOUNT_ID`.
+
+### 7.5 — Preencher o `.env`
+
+```
+IG_ACCOUNT_ID=17841000000000000
+IG_ACCESS_TOKEN=token_de_longa_duracao_do_passo_7.3
+```
+
+**Quer nunca mais renovar o token?** Isso exige criar um **System User**
+dentro de um Business Manager verificado (processo mais longo, envolve
+verificação de empresa pela Meta). Para começar, o token de 60 dias já
+publica normalmente — é só lembrar de renovar a cada ~2 meses.
 
 ---
 
