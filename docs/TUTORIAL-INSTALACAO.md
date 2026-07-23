@@ -89,17 +89,20 @@ O pipeline organiza os carrosséis em um quadro Trello. Cada usuário precisa
 da **própria** chave — usar a chave de outra conta expõe os cards de quem
 emprestou a chave.
 
-**Passo a passo:**
+**Passo a passo (link direto — o caminho mais rápido):**
 
-1. Acesse **https://trello.com/power-ups/admin** logado na sua conta Trello.
-2. Clique em **"Novo"** para criar um Power-Up (pode chamar de qualquer
-   nome, ex: "Meu Pipeline de Carrosséis").
-3. Depois de criado, vá na aba **"API key"** do Power-Up — ali está sua
-   `TRELLO_KEY`.
-4. Na mesma página, clique no link **"Token"** (geralmente logo abaixo da
-   API key) — autorize o acesso e copie o token gerado. Esse é seu
-   `TRELLO_TOKEN`.
-5. Cole os dois valores no `.env`:
+1. Acesse **[trello.com/app-key](https://trello.com/app-key)** logado na
+   sua conta Trello. Essa página já mostra sua **API Key** direto no topo
+   — copie, é o seu `TRELLO_KEY`.
+2. Na mesma página, logo abaixo da API Key, tem o texto "Token" com um
+   link — clique nele. Se não aparecer, cole esta URL no navegador
+   substituindo `SUA_API_KEY` pela chave copiada no passo 1:
+   ```
+   https://trello.com/1/authorize?expiration=never&scope=read,write&response_type=token&name=Carrossel%20Toolkit&key=SUA_API_KEY
+   ```
+3. Clique em **"Allow"** (autorizar) — a página mostra uma sequência longa
+   de letras/números. Esse é o seu `TRELLO_TOKEN`.
+4. Cole os dois valores no `.env`:
    ```
    TRELLO_KEY=sua_key_aqui
    TRELLO_TOKEN=seu_token_aqui
@@ -152,9 +155,10 @@ O Supabase guarda as imagens/vídeos gerados e gera um link público para
 cada um — esse link é o que o Trello e o Instagram usam para exibir a arte.
 É grátis para o volume deste uso.
 
-1. Acesse [supabase.com](https://supabase.com) → **Start your project** →
-   entre com GitHub, Google ou e-mail.
-2. Clique em **New Project**:
+1. Acesse **[supabase.com/dashboard/sign-up](https://supabase.com/dashboard/sign-up)**
+   (link direto de cadastro) → entre com GitHub, Google ou e-mail.
+2. Depois de logado, acesse **[supabase.com/dashboard/new](https://supabase.com/dashboard/new)**
+   (link direto para criar projeto) ou clique em **New Project**:
    - **Name:** qualquer nome (ex: `carrossel-toolkit`)
    - **Database Password:** gere uma senha forte e guarde num lugar seguro
      (não é usada por este projeto, mas o Supabase exige)
@@ -201,12 +205,12 @@ Faça uma vez só; depois disso é só usar.
 
 ### 7.2 — Criar o app na Meta for Developers
 
-1. Acesse [developers.facebook.com](https://developers.facebook.com) →
-   faça login com a MESMA conta do Facebook conectada à sua página.
-2. Menu superior → **My Apps** → **Create App**.
-3. Escolha o tipo **Business** → dê um nome ao app (ex: "Publicador
+1. Acesse **[developers.facebook.com/apps/creation](https://developers.facebook.com/apps/creation/)**
+   (link direto de criação de app) → faça login com a MESMA conta do
+   Facebook conectada à sua página.
+2. Escolha o tipo **Business** → dê um nome ao app (ex: "Publicador
    Carrossel") → **Create App**.
-4. Dentro do app criado, procure o card **Instagram Graph API** (ou
+3. Dentro do app criado, procure o card **Instagram Graph API** (ou
    **Instagram API with Instagram Login**, dependendo da versão da
    interface) → clique em **Set Up** / **Configurar**.
 
@@ -259,10 +263,45 @@ IG_ACCOUNT_ID=17841000000000000
 IG_ACCESS_TOKEN=token_de_longa_duracao_do_passo_7.3
 ```
 
-**Quer nunca mais renovar o token?** Isso exige criar um **System User**
-dentro de um Business Manager verificado (processo mais longo, envolve
-verificação de empresa pela Meta). Para começar, o token de 60 dias já
-publica normalmente — é só lembrar de renovar a cada ~2 meses.
+### 7.6 — Token que nunca expira (System User)
+
+O token do passo 7.3 dura 60 dias — funciona bem, mas precisa renovar
+periodicamente. Se você quer um token **sem data de expiração**, o caminho
+é criar um **System User** dentro de um Business Manager verificado. É mais
+burocrático (envolve verificação de empresa pela Meta), mas só precisa
+fazer uma vez.
+
+**⚠️ Recomendação: fale com o Jorge antes de começar esta etapa.** É a parte
+mais fácil de travar sozinho (verificação de empresa recusada, permissão
+faltando, ativo não vinculado direito) — peça para ele te acompanhar ao
+vivo nesta etapa específica em vez de tentar sozinho pelo tutorial.
+
+Passo a passo (para fazer com acompanhamento):
+
+1. Crie (ou acesse) um Business Manager em
+   **[business.facebook.com/create](https://business.facebook.com/create)** —
+   preencha nome da empresa, seu nome e e-mail comercial.
+2. Verifique a empresa: **[business.facebook.com/security](https://business.facebook.com/settings/security)**
+   → **Verificação da empresa** → siga o processo pedido (normalmente CNPJ
+   e documento de comprovação).
+3. Vincule o app criado no passo 7.2 ao Business Manager:
+   **[business.facebook.com/settings/apps](https://business.facebook.com/settings/apps)**
+   → **Adicionar** → selecione o app pelo ID (fica em **App Settings →
+   Basic** do app).
+4. Vincule a Página do Facebook (a mesma do passo 7.1) em
+   **[business.facebook.com/settings/pages](https://business.facebook.com/settings/pages)**
+   → **Adicionar**.
+5. Crie o System User em
+   **[business.facebook.com/settings/system-users](https://business.facebook.com/settings/system-users)**
+   → **Add** → dê um nome (ex: "Publicador Carrossel") → papel **Admin**.
+6. Com o System User criado, clique nele → **Add Assets** → selecione a
+   Página do Facebook vinculada → marque permissão de **Manage Page**.
+7. Ainda na tela do System User, clique em **Generate New Token** →
+   selecione o app do passo 7.2 → marque as mesmas permissões do passo
+   7.3 (`instagram_basic`, `instagram_content_publish`, `pages_show_list`,
+   `pages_read_engagement`) → **Generate Token**.
+8. Esse token **não expira** — substitua o `IG_ACCESS_TOKEN` no `.env` por
+   ele.
 
 ---
 
