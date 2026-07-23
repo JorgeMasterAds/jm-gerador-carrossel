@@ -1,0 +1,75 @@
+[
+  {
+    "cod": "jm-c01",
+    "cardId": null,
+    "brand": "jm-ads",
+    "template": null,
+    "eixo": "Eixo de exemplo",
+    "trend": false,
+    "capaImagem": null,
+    "ctaBtn": "Link na bio · Fale comigo",
+    "legenda": "Esta é uma legenda de exemplo para o carrossel. Escreva aqui o texto que vai acompanhar o post no Instagram — 150 a 200 palavras, tom conversacional, sem hashtags.",
+    "gancho": "Este é o gancho da capa — a frase que para o scroll",
+    "ganchoCorpo": "Uma linha de apoio ao gancho, reforçando a promessa do carrossel.",
+    "slides": [
+      {
+        "titulo": "Slide 2 — Contexto",
+        "corpo": "Primeira linha do contexto.\nSegunda linha explicando a situação atual.\nTerceira linha com um dado ou observação.",
+        "tipo": "conteudo",
+        "label": "CONTEXTO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 3 — Aprofundamento",
+        "corpo": "Aqui você aprofunda a ideia central.\nMostra a camada que a maioria não vê.",
+        "tipo": "conteudo",
+        "label": "APROFUNDAMENTO",
+        "imagem": null
+      },
+      {
+        "titulo": "Uma frase de impacto que resume a virada de chave.",
+        "corpo": "",
+        "tipo": "impacto",
+        "label": "IMPACTO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 5 — Ação",
+        "corpo": "O que fazer com essa informação.\nUm passo prático e direto.",
+        "tipo": "conteudo",
+        "label": "AÇÃO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 6 — Segundo ângulo",
+        "corpo": "Outra perspectiva sobre o mesmo tema.\nReforça o raciocínio anterior.",
+        "tipo": "conteudo",
+        "label": "APROFUNDAMENTO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 7 — Conteúdo",
+        "corpo": "Mais um ponto relevante para o avatar.\nConecta com o próximo slide.",
+        "tipo": "conteudo",
+        "label": "CONTEÚDO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 8 — Conteúdo",
+        "corpo": "Desenvolvimento do raciocínio.\nPrepara o terreno para a prova.",
+        "tipo": "conteudo",
+        "label": "CONTEÚDO",
+        "imagem": null
+      },
+      {
+        "titulo": "Slide 9 — Prova",
+        "corpo": "Um número ou dado concreto que sustenta o argumento.\nCite a fonte real — nunca invente.",
+        "tipo": "conteudo",
+        "label": "PROVA",
+        "imagem": null
+      }
+    ],
+    "ctaTitulo": "Quer aplicar isso no seu negócio?",
+    "cta": "Me chama e vamos conversar sobre o seu caso."
+  }
+]

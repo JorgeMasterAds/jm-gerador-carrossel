@@ -1,0 +1,23 @@
+{
+  "_comentario": "Renomeie este arquivo para brand.config.json e preencha com os dados da SUA marca. Este arquivo não deve ser versionado/compartilhado se contiver dados sensíveis do avatar do cliente.",
+
+  "nicho": "Ex: Consultoria financeira para autônomos",
+
+  "perfil": {
+    "nome": "Seu Nome | Seu Cargo",
+    "handle": "@seu.instagram",
+    "foto": "file:///C:/CAMINHO/COMPLETO/PARA/carrossel-toolkit/assets/foto-perfil.png"
+  },
+
+  "logo": "file:///C:/CAMINHO/COMPLETO/PARA/carrossel-toolkit/assets/logo.png",
+
+  "cores": {
+    "_comentario": "Cor de destaque (accent) de cada template. Mantém o conceito/diagramação de cada skin — só a cor muda.",
+    "mono": "#EC1325",
+    "neon": "#EC1325",
+    "darkwarm": "#FF8A3D",
+    "cyber": "#FF003C"
+  },
+
+  "ctaPadrao": "Link na bio · Fale comigo"
+}

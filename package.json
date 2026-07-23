@@ -1,0 +1,13 @@
+{
+  "name": "carrossel-toolkit",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Gerador de carrosséis Instagram — motor de geração + publicação configurável por marca",
+  "scripts": {
+    "gerar": "node gerar-htmls.js cards-exemplo.json --smart-rotation"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.0.0",
+    "dotenv": "^16.4.7"
+  }
+}

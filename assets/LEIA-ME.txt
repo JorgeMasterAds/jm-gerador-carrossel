@@ -1,0 +1,8 @@
+Coloque aqui a sua foto de perfil e seu logo.
+
+Depois, aponte para eles em config/brand.config.json usando o caminho
+completo do arquivo, no formato:
+
+  file:///C:/CAMINHO/COMPLETO/PARA/carrossel-toolkit/assets/sua-foto.png
+
+Veja o passo a passo completo em docs/TUTORIAL-INSTALACAO.md.
