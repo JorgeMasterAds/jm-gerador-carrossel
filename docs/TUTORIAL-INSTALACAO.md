@@ -73,7 +73,7 @@ perfil dentro da pasta `assets/` do projeto e aponte para ela. Exemplo no
 Windows:
 
 ```
-file:///C:/Users/SeuNome/carrossel-toolkit/assets/foto-perfil.png
+file:///C:/Users/SeuNome/jm-gerador-carrossel/assets/foto-perfil.png
 ```
 
 **Sobre `cores`:** é a cor de destaque de cada estilo visual (template).
@@ -159,7 +159,7 @@ cada um — esse link é o que o Trello e o Instagram usam para exibir a arte.
    (link direto de cadastro) → entre com GitHub, Google ou e-mail.
 2. Depois de logado, acesse **[supabase.com/dashboard/new](https://supabase.com/dashboard/new)**
    (link direto para criar projeto) ou clique em **New Project**:
-   - **Name:** qualquer nome (ex: `carrossel-toolkit`)
+   - **Name:** qualquer nome (ex: `jm-gerador-carrossel`)
    - **Database Password:** gere uma senha forte e guarde num lugar seguro
      (não é usada por este projeto, mas o Supabase exige)
    - **Region:** escolha a mais próxima (ex: `South America (São Paulo)`)

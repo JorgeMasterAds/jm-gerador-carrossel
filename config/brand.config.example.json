@@ -6,10 +6,10 @@
   "perfil": {
     "nome": "Seu Nome | Seu Cargo",
     "handle": "@seu.instagram",
-    "foto": "file:///C:/CAMINHO/COMPLETO/PARA/carrossel-toolkit/assets/foto-perfil.png"
+    "foto": "file:///C:/CAMINHO/COMPLETO/PARA/jm-gerador-carrossel/assets/foto-perfil.png"
   },
 
-  "logo": "file:///C:/CAMINHO/COMPLETO/PARA/carrossel-toolkit/assets/logo.png",
+  "logo": "file:///C:/CAMINHO/COMPLETO/PARA/jm-gerador-carrossel/assets/logo.png",
 
   "cores": {
     "_comentario": "Cor de destaque (accent) de cada template. Mantém o conceito/diagramação de cada skin — só a cor muda.",

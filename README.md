@@ -17,8 +17,8 @@ Supabase e Instagram.
 Resumo rápido:
 
 ```bash
-git clone https://github.com/JorgeMasterAds/carrossel-toolkit.git
-cd carrossel-toolkit
+git clone https://github.com/JorgeMasterAds/jm-gerador-carrossel.git
+cd jm-gerador-carrossel
 npm install
 cp .env.example .env                                       # depois preencha
 cp config/brand.config.example.json config/brand.config.json  # depois preencha
@@ -36,7 +36,7 @@ te guia interativamente pelas perguntas de configuração (nome, @, cor,
 credenciais do Trello/Supabase/Instagram):
 
 ```
-Clone o repositório https://github.com/JorgeMasterAds/carrossel-toolkit.git
+Clone o repositório https://github.com/JorgeMasterAds/jm-gerador-carrossel.git
 para uma pasta local. Depois:
 
 1. Rode `npm install` dentro da pasta clonada.

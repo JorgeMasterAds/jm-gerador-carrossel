@@ -1,4 +1,4 @@
-# carrossel-toolkit — instruções do projeto
+# jm-gerador-carrossel — instruções do projeto
 
 Ferramenta comercial de geração de carrosséis Instagram. Vendida com uma trava
 de licença simples (senha de ativação) como termo comercial do produto.
